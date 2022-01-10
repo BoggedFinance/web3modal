@@ -1,12 +1,10 @@
 import * as env from "detect-browser";
 
-import { CHAIN_DATA_LIST } from "../constants";
 import { themesList } from "../themes";
 import { providers, injected } from "../providers";
 import {
   IProviderInfo,
   IInjectedProvidersMap,
-  ChainData,
   ThemeColors,
   RequiredOption
 } from "./types";
@@ -196,16 +194,7 @@ export function filterProviderChecks(checks: string[]): string {
 }
 
 export function getChainId(network: string): number {
-  const chains: ChainData[] = Object.values(CHAIN_DATA_LIST);
-  const match = filterMatches<ChainData>(
-    chains,
-    x => x.network === network,
-    undefined
-  );
-  if (!match) {
-    throw new Error(`No chainId found match ${network}`);
-  }
-  return match.chainId;
+  return parseInt(network);
 }
 
 export function getThemeColors(theme: string | ThemeColors): ThemeColors {
